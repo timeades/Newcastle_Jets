@@ -5,8 +5,6 @@ import {
     userPassword,
     userEmailBad,
     userPasswordBad,
-    userEmailLong,
-    userPasswordLong,
 }   from "./utils/constants/users";
 import { baseUrl } from "./utils/constants/urls";
 
@@ -15,8 +13,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Happy Path Login', () => {
-    test('Hudl login page has correct title and inputs ', async ({ page }) => {
-        
+    test('Hudl login page has correct title and inputs ', async ({ page }) => {    
         await expect(page).toHaveTitle(/Log In/);
         expect(LoginComponent.emailInput).toBeTruthy();
         expect(LoginComponent.passwordInput).toBeTruthy();
@@ -24,18 +21,17 @@ test.describe('Happy Path Login', () => {
 
     });
 
-    test('login user', async ({ page }) => {
-        
+    test('login user', async ({ page }) => {       
         await page.fill(LoginComponent.emailInput, userEmail);
         await page.fill(LoginComponent.passwordInput, userPassword);
+        await page.locator(LoginComponent.rememberMe).check();
         await page.locator(LoginComponent.logIn).click();
         await expect(page).toHaveTitle(/Library - Hudl/);
     });
 });
 
 test.describe('Login incorrect credentials', () => {
-    test('login with wrong email', async ({ page }) => {
-        
+    test('login with wrong email', async ({ page }) => {   
         await page.fill(LoginComponent.emailInput, userEmailBad);
         await page.fill(LoginComponent.passwordInput, userPassword);
         await page.locator(LoginComponent.logIn).click();
@@ -44,10 +40,18 @@ test.describe('Login incorrect credentials', () => {
     });
 
     test('login with wrong password', async ({ page }) => {
-        
         await page.fill(LoginComponent.emailInput, userEmail);
         await page.fill(LoginComponent.passwordInput, userPasswordBad);
         await page.locator(LoginComponent.logIn).click();
         expect(LoginComponent.errorDisplay).toBeTruthy();
+    });
+});
+
+test.describe('Forgotten password routine from login page', () => {
+    test('Page components present and in correct state', async ({ page }) => {   
+        await page.locator(LoginComponent.needHelp).click();
+        expect(LoginComponent.passwordReset).toBeTruthy();
+
+
     });
 });
