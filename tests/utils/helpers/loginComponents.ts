@@ -1,4 +1,4 @@
-export enum LogInComponent {
+export enum LoginComponent {
     emailInput = '[data-qa-id="email-input"]',
     passwordInput = '[data-qa-id="password-input"]',
     logIn = '[data-qa-id="login-btn"]',
