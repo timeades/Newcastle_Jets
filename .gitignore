@@ -1,4 +1,12 @@
+### Project ###
+# General
 node_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
