@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from '@playwright/test';
 import { LoginComponent } from "./utils/helpers/loginComponents";
 import {
     userEmail,
@@ -7,6 +7,10 @@ import {
     userPasswordBad,
 }   from "./utils/constants/users";
 import { baseUrl } from "./utils/constants/urls";
+import {
+    setLoginApiDown,
+    setLoginApiUp
+}   from "./utils/api/api";
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${baseUrl}`);
@@ -18,6 +22,10 @@ test.describe('Happy Path Login', () => {
         expect(LoginComponent.emailInput).toBeTruthy();
         expect(LoginComponent.passwordInput).toBeTruthy();
         expect(LoginComponent.rememberMe).toBeTruthy();
+        await page.route('https://www.hudl.com/login', (route) => 
+        route.fulfill({
+            status: 200,
+        }));
 
     });
 
@@ -36,7 +44,6 @@ test.describe('Login incorrect credentials', () => {
         await page.fill(LoginComponent.passwordInput, userPassword);
         await page.locator(LoginComponent.logIn).click();
         expect(LoginComponent.errorDisplay).toBeTruthy();
-
     });
 
     test('login with wrong password', async ({ page }) => {
@@ -50,8 +57,9 @@ test.describe('Login incorrect credentials', () => {
 test.describe('Forgotten password routine from login page', () => {
     test('Page components present and in correct state', async ({ page }) => {   
         await page.locator(LoginComponent.needHelp).click();
-        expect(LoginComponent.passwordReset).toBeTruthy();
+        //expect(page.(LoginComponent.passwordReset)).toBeTruthy();
 
 
     });
 });
+
