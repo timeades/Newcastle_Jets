@@ -1,5 +1,16 @@
 import { test, expect, type Page } from '@playwright/test';
-import { LoginComponent } from "./utils/helpers/loginComponents";
+import { 
+    emailInput,
+    passwordInput,
+    logIn,
+    rememberMe,
+    needHelp,
+    errorDisplay,
+    orgLogIn,
+    passwordReset,
+    sendRequest,
+    resetPasswordHeadline
+} from "./utils/helpers/loginComponents";
 import {
     userEmail,
     userPassword,
@@ -25,12 +36,12 @@ test.describe('api tests', () => {
         })
         )
         //using the same credentials as the happy path test
-        await page.fill(LoginComponent.emailInput, userEmail); 
-        await page.fill(LoginComponent.passwordInput, userPassword);
-        await page.locator(LoginComponent.rememberMe).check();
-        await page.locator(LoginComponent.logIn).click();
+        await page.fill(emailInput, userEmail); 
+        await page.fill(passwordInput, userPassword);
+        await page.locator(rememberMe).check();
+        await page.locator(logIn).click();
         // expecting the error-display rather than the title of the homePage
-        expect(LoginComponent.errorDisplay).toBeTruthy();
+        expect(errorDisplay).toBeTruthy();
 
     });
 });
