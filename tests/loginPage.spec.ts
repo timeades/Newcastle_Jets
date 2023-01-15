@@ -102,11 +102,15 @@ test.describe('Forgotten password routine', () => {
         expect(errorDisplay).toBeTruthy();
         await page.locator(needHelp).click();
         expect(resetPasswordHeadline).toBeTruthy();
+        page.getByText('Let\’s reset your password');
         expect(passwordReset).toBeTruthy();
         expect(resetPasswordButton).toBeTruthy();
         expect(emailHelpHeadline).toBeTruthy();
+        page.getByText('Not sure which email address to use?');
         expect(emailHelpSubHeadline).toBeTruthy();
+        page.getByText('Didn\'t receive that email from Hudl?');
         expect(helpSubHeadline).toBeTruthy();
+        page.getByText('Still having trouble?');
         expect(emailSupport).toBeTruthy();
     });
 });
