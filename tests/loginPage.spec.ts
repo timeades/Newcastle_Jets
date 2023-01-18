@@ -10,7 +10,6 @@ import {
     orgEmailInput,
     orgLoginButton,
     passwordReset,
-    sendRequest,
     resetPasswordHeadline,
     resetPasswordButtonD,
     resetPasswordButton,
@@ -30,7 +29,7 @@ import { baseUrl } from "./utils/constants/urls";
 
 // This sets the url that each of the tests will run against 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${baseUrl}`);
+    await page.goto(`${baseUrl}login?forward=%2Flibrary%2F320073`);
 });
 
 test.describe('Happy Path Login', () => {
