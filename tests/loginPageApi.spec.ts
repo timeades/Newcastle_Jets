@@ -1,3 +1,17 @@
+/* 
+Due to time constraints and being out of action for a couple of days this section is light.
+I should have included tests to check the return from login
+{username: "tim.eades@mac.com", password: "foobar", rememberMe: false, forward: null, schoolId: null,…}
+forward: null
+password: "foobar"
+rememberMe: false
+schoolId: null
+timezoneOffset: 0
+username: "tim.eades@mac.com"
+and also a GET request on https://www.hudl.com/api/v2/teams/320073/events?returnFull=false and
+https://www.hudl.com/api/v2/teams/320073/season-views
+*/
+
 import { test, expect} from "@playwright/test";
 import {
   emailInput,
